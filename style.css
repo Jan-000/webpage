@@ -4,5 +4,12 @@ body {
     font-family: Overpass;
     font-size: 28.5px;
     color: rgb(157, 157, 157);
-    background-color: rgb(240, 236, 232)
+    background-color: rgb(240, 236, 232);
+    margin: 250px
+
+}
+
+a {
+ text-decoration: none;   
+ color:rgb(157, 157, 157)
 }
