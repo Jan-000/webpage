@@ -1,25 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Overpass:wght@900&display=swap");
 
 body {
-    font-family: Overpass;
-    font-size: 28.5px;
-    color: rgb(157, 157, 157);
-    background-color: rgb(240, 236, 232);
-
+  font-family: Overpass;
+  font-size: 28.5px;
+  color: rgb(157, 157, 157);
+  background-color: rgb(240, 236, 232);
 }
 
 a {
- text-decoration: none;   
- color:rgb(157, 157, 157)
+  text-decoration: none;
+  color: rgb(157, 157, 157);
 }
 
 .main-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+}
 
-
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: left;
+.test-iframe {
+  font: arial;
 }
