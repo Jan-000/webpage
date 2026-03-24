@@ -9,8 +9,8 @@ body {
 }
 
 a {
- text-decoration: none;   
- color:rgb(157, 157, 157)
+    text-decoration: none;
+    color: rgb(157, 157, 157)
 }
 
 .main-content {
@@ -22,4 +22,12 @@ a {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: left;
+}
+
+ul ul li {
+    line-height: 1.4;
+}
+
+ul {
+    line-height: 1.4;
 }
