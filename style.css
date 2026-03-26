@@ -103,13 +103,15 @@ ul {
     }
 
     .role-viewport {
-        display: inline;
-        overflow: visible;
+        display: inline-block;
+        overflow: hidden;
+        max-width: 100%;
+        vertical-align: bottom;
     }
 
     .role-text {
-        display: inline;
-        white-space: normal;
+        display: inline-block;
+        white-space: nowrap;
     }
 }
 
