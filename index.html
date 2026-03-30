@@ -16,15 +16,16 @@
             <span id="role-text" class="role-text">am frontend dev at <a href="https://www.lawlift.com/">Lawlift
                     GmbH</a>.</span>
         </span>
-        <br><br>Previously, I've done a QA internship at <a href="https://alteos.com/en">Alteos.</a><br>
-        Whole coding adventure started at Ironhack bootcamp in Berlin.<br><br>Have a look into my projects :
+
+        <br><br>Samples of my work:
         <ul>
             <li><a href="https://jan-000.github.io/Game/">colors</a></li>
-            <li><a href="index4.html"><s>MitBahn</s></a></li>
+            <li><a href="https://jan-000.github.io/differ/">text diffing (and resolving) tool</a></li>
             <li><a href="https://jan-000.github.io/trips/pages/index">long distance skating trips</a></li>
-            <li><a href="https://jan-000.github.io/differ/">text diffing (and resolving)</a></li>
         </ul>
-        Concerning architecture, I am happy to share my portfolio by email. <br>List of buildings I worked on:
+        <br><br>
+        Concerning architecture, I am happy to share my portfolio by email. <br><br> I have done execution
+        projects and construction site supervision for those buildings:
         <ul>
             <li><a href="https://www.landsrl.com/en/work/the-q-nurnberg/">The Q Nurnberg, refurbishment</a></li>
             <li><a href="https://edge.tech/portfolio/edge-grand-central-berlin">Edge Offices Hbf, Berlin</a></li>
@@ -43,17 +44,21 @@
 
     <script>
         const roleText = document.getElementById('role-text');
+
         const baseRoleText = 'am frontend dev at <a href="https://www.lawlift.com/">Lawlift GmbH</a>.';
+        const qaRoleText = "did code Quality Assurance at <a href=\"https://alteos.com/en\">Alteos GmbH</a>";
         const rotatingTexts = [
             baseRoleText,
+            qaRoleText,
             'worked as an architect for 7 years',
             'am ocassional long distance skater'
         ];
 
+
         let currentIndex = 0;
         let transitionCount = 0;
         let isStopped = false;
-        const cycleMs = 2500;
+        const cycleMs = 3000;
         const animationMs = 450;
         const stopAfterTransitions = Math.round(rotatingTexts.length * 1.5);
 
@@ -66,6 +71,7 @@
 
                 if (transitionCount >= stopAfterTransitions) {
                     roleText.innerHTML = baseRoleText;
+
                     roleText.classList.remove('is-out');
                     roleText.classList.add('is-in', 'is-toggleable');
                     isStopped = true;
@@ -75,6 +81,7 @@
 
                 currentIndex = (currentIndex + 1) % rotatingTexts.length;
                 roleText.innerHTML = rotatingTexts[currentIndex];
+
                 roleText.classList.remove('is-out');
                 roleText.classList.add('is-in');
             }, animationMs);
@@ -95,6 +102,7 @@
 
             setTimeout(() => {
                 roleText.innerHTML = rotatingTexts[currentIndex];
+
                 roleText.classList.remove('is-out');
                 roleText.classList.add('is-in', 'is-toggleable');
             }, animationMs);
