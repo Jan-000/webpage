@@ -112,7 +112,7 @@ ul {
 @media (max-width: 768px) {
     body {
         min-height: auto;
-        padding: 24px 18px 40px;
+        padding: 2rem:
     }
 
     .main-content {
@@ -137,7 +137,7 @@ ul {
 @media (max-width: 480px) {
     body {
         font-size: 1.1rem;
-        padding: 18px 14px 32px;
+        padding: 2rem;
     }
 
     ul {
