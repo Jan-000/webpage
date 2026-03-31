@@ -51,22 +51,17 @@
     <script>
         const roleText = document.getElementById('role-text');
 
-        const baseRoleText = 'am frontend dev at <a href="https://www.lawlift.com/">Lawlift GmbH</a>.';
-        const qaRoleText = "did code Quality Assurance at <a href=\"https://alteos.com/en\">Alteos GmbH</a>";
         const rotatingTexts = [
-            baseRoleText,
-            qaRoleText,
+            'am ocassional long distance skater',
             'worked as an architect for 7 years',
-            'am ocassional long distance skater'
+            'did code Quality Assurance at <a href="https://alteos.com/en">Alteos GmbH</a>',
+            'am frontend dev at <a href="https://www.lawlift.com/">Lawlift GmbH</a>.'
         ];
 
-
         let currentIndex = 0;
-        let transitionCount = 0;
         let isStopped = false;
-        const cycleMs = 3300; // Increased to 4 seconds to make role text stay 1s longer
+        const cycleMs = 3300;
         const animationMs = 450;
-        const stopAfterTransitions = Math.round(rotatingTexts.length * 1.5);
 
         const progressSegments = document.querySelectorAll('.progress-segment');
 
@@ -86,57 +81,69 @@
             startSegmentFill(currentIndex, duration);
         };
 
+        const stopRotation = () => {
+            if (isStopped) return;
+            isStopped = true;
+            clearInterval(rotationId);
+        };
+
+        const jumpToRole = (index) => {
+            stopRotation();
+            if (index === currentIndex) return;
+
+            const fadeMs = 150;
+            roleText.classList.remove('is-in', 'is-out', 'is-fade-in', 'is-fade-out');
+            void roleText.offsetWidth;
+            roleText.classList.add('is-fade-out');
+            currentIndex = index;
+
+            setTimeout(() => {
+                roleText.innerHTML = rotatingTexts[currentIndex];
+                roleText.classList.remove('is-fade-out');
+                roleText.classList.add('is-fade-in');
+            }, fadeMs);
+            // keep all segments visually the same (all done = all dark grey)
+        };
+
         const rotateRoles = () => {
+            if (isStopped) return;
             roleText.classList.remove('is-in');
             roleText.classList.add('is-out');
 
             setTimeout(() => {
-                transitionCount += 1;
-
-                if (transitionCount >= stopAfterTransitions) {
-                    roleText.innerHTML = baseRoleText;
+                if (isStopped) {
                     roleText.classList.remove('is-out');
-                    roleText.classList.add('is-in', 'is-toggleable');
-                    isStopped = true;
-                    clearInterval(rotationId);
-                    // mark all segments done
+                    roleText.classList.add('is-in');
+                    return;
+                }
+
+                currentIndex += 1;
+                roleText.innerHTML = rotatingTexts[currentIndex];
+                roleText.classList.remove('is-out');
+                roleText.classList.add('is-in');
+
+                if (currentIndex >= rotatingTexts.length - 1) {
+                    // reached Lawlift — stop here
+                    stopRotation();
                     progressSegments.forEach(seg => {
                         seg.classList.remove('active');
                         seg.classList.add('done');
                     });
-                    return;
+                } else {
+                    updateProgressBar(cycleMs - animationMs);
                 }
-
-                currentIndex = (currentIndex + 1) % rotatingTexts.length;
-                roleText.innerHTML = rotatingTexts[currentIndex];
-                // fill duration = remaining time until next rotation fires
-                updateProgressBar(cycleMs - animationMs);
-
-                roleText.classList.remove('is-out');
-                roleText.classList.add('is-in');
             }, animationMs);
         };
 
-        // start filling segment 0 for the full first cycle
+        // Initialize: show first text and start progress bar
+        roleText.innerHTML = rotatingTexts[0];
         updateProgressBar(cycleMs);
         const rotationId = setInterval(rotateRoles, cycleMs);
 
-        roleText.addEventListener('click', (event) => {
-            if (!isStopped) {
-                return;
-            }
-
-            event.preventDefault();
-            currentIndex = (currentIndex + 1) % rotatingTexts.length;
-
-            roleText.classList.remove('is-in');
-            roleText.classList.add('is-out');
-
-            setTimeout(() => {
-                roleText.innerHTML = rotatingTexts[currentIndex];
-                roleText.classList.remove('is-out');
-                roleText.classList.add('is-in', 'is-toggleable');
-            }, animationMs);
+        // Make each progress segment clickable
+        progressSegments.forEach((seg, index) => {
+            seg.style.cursor = 'pointer';
+            seg.addEventListener('click', () => jumpToRole(index));
         });
     </script>
 </body>

@@ -140,7 +140,7 @@ ul {
     gap: 6px;
     margin-top: 10px;
     width: 100%;
-    opacity: 25%
+    opacity: 35%
 }
 
 .progress-segment {
@@ -178,4 +178,22 @@ ul {
     to {
         width: 100%;
     }
+}
+
+.role-text.is-fade-out {
+    animation: role-fade-out 150ms ease forwards;
+}
+
+.role-text.is-fade-in {
+    animation: role-fade-in 150ms ease;
+}
+
+@keyframes role-fade-out {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+@keyframes role-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
