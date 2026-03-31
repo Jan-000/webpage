@@ -5,56 +5,63 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Jan Gorecki</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="main-content">
-        Hi, my name is Jan Gorecki and I<br>
-        <span class="role-viewport">
-            <span id="role-text" class="role-text">am ocassional long distance skater</span>
-        </span>
-        <div class="progress-bar">
-            <div class="progress-segment" tabindex="0"></div>
-            <div class="progress-segment" tabindex="0"></div>
-            <div class="progress-segment" tabindex="0"></div>
-            <div class="progress-segment" tabindex="0"></div>
-        </div>
+        <header class="hero">
+            <p class="eyebrow">Jan Gorecki</p>
+            <h1 class="intro">
+                I
+                <span class="role-viewport">
+                    <span id="role-text" class="role-text">am front end dev at <a href="https://www.lawlift.com/">Lawlift GmbH</a>.</span>
+                </span>
+            </h1>
+            <div class="progress-bar" aria-label="Role timeline">
+                <div class="progress-segment" tabindex="0"></div>
+                <div class="progress-segment" tabindex="0"></div>
+                <div class="progress-segment" tabindex="0"></div>
+                <div class="progress-segment" tabindex="0"></div>
+            </div>
+        </header>
 
-        <br><br><br><br>Samples of my work:
-        <ul>
-            <li><a href="https://jan-000.github.io/Game/">colors</a></li>
-            <li><a href="https://jan-000.github.io/differ/">text diffing (and resolving) tool</a></li>
-            <li><a href="https://jan-000.github.io/trips/pages/index">long distance skating trips</a></li>
-        </ul>
-        <br><br><br><br>
-        Concerning architecture, I am happy to share my portfolio by email. <br><br> I have done execution
-        projects and construction site supervision for those buildings:
-        <ul>
-            <li><a href="https://www.landsrl.com/en/work/the-q-nurnberg/">The Q Nurnberg, refurbishment</a></li>
-            <li><a href="https://edge.tech/portfolio/edge-grand-central-berlin">Edge Offices Hbf, Berlin</a></li>
-            <li><a href="https://confederationcentre.ch/en/">Confederation Centre shopping mall, Geneva</a></li>
-            <li><a href="https://cche.com/en/Projects/seic/">SEIC headquarters, Nyon, VD</a></li>
-        </ul>
+        <section class="content-section">
+            <h2>Selected Work</h2>
+            <ul class="link-list">
+                <li><a href="https://jan-000.github.io/Game/">colors</a></li>
+                <li><a href="https://jan-000.github.io/differ/">text diffing (and resolving) tool</a></li>
+                <li><a href="https://jan-000.github.io/trips/pages/index">long distance skating trips</a></li>
+            </ul>
+        </section>
 
+        <section class="content-section">
+            <h2>Architecture</h2>
+            <p class="section-copy">I am happy to share my portfolio by email. I have done execution projects and construction site supervision for these buildings:</p>
+            <ul class="link-list">
+                <li><a href="https://www.landsrl.com/en/work/the-q-nurnberg/">The Q Nurnberg, refurbishment</a></li>
+                <li><a href="https://edge.tech/portfolio/edge-grand-central-berlin">Edge Offices Hbf, Berlin</a></li>
+                <li><a href="https://confederationcentre.ch/en/">Confederation Centre shopping mall, Geneva</a></li>
+                <li><a href="https://cche.com/en/Projects/seic/">SEIC headquarters, Nyon, VD</a></li>
+            </ul>
+        </section>
 
-        <br>
-        <br>
-        <br>
-        <br>
-        <!-- todo : add link to architecture portfolio -->
-        <a href="index2.html"> .</a>
+        <footer class="page-footer">
+            <!-- todo : add link to architecture portfolio -->
+            <a href="index2.html">.</a>
+        </footer>
     </div>
 
     <script>
         const roleText = document.getElementById('role-text');
+        const lawliftText = 'am frontend dev at <a href="https://www.lawlift.com/">Lawlift GmbH</a>.';
 
         const rotatingTexts = [
-            'am ocassional long distance skater',
-            'worked as an architect for 7 years',
+            lawliftText,
             'did code Quality Assurance at <a href="https://alteos.com/en">Alteos GmbH</a>',
-            'am frontend dev at <a href="https://www.lawlift.com/">Lawlift GmbH</a>.'
+            'worked as an architect for 7 years',
+            'am ocassional long distance skater'
         ];
 
         let currentIndex = 0;
@@ -136,7 +143,7 @@
                 roleText.classList.add('is-in');
 
                 if (currentIndex >= rotatingTexts.length - 1) {
-                    // reached Lawlift — keep final segment filling at normal speed
+                    // reached the last role — keep final segment filling at normal speed
                     isStopped = true;
                     updateProgressBar(cycleMs);
                     finalizeTimeoutId = setTimeout(() => {
@@ -152,7 +159,7 @@
             }, animationMs);
         };
 
-        // Initialize: show first text and start progress bar
+        // Initialize: start on Lawlift, then continue through the requested order.
         roleText.innerHTML = rotatingTexts[0];
         updateProgressBar(cycleMs);
         scheduleNextRotation();

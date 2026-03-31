@@ -1,14 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@900&display=swap');
-
 * {
     box-sizing: border-box;
 }
 
 body {
-    font-family: Overpass;
-    font-size: clamp(1.25rem, 1rem + 1.2vw, 1.78125rem);
-    color: rgb(157, 157, 157);
-    background-color: rgb(240, 236, 232);
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 0.8rem;
+    color: rgb(74, 74, 74);
+    background-color: rgb(248, 248, 247);
     margin: 0;
     min-height: 100vh;
     padding: 48px 24px;
@@ -16,7 +14,7 @@ body {
 
 a {
     text-decoration: none;
-    color: rgb(157, 157, 157)
+    color: rgb(74, 74, 74)
 }
 
 .progress-segment:focus {
@@ -39,12 +37,30 @@ a {
     text-align: justify;
 }
 
+.hero {
+    display: flex;
+    flex-direction: column;
+}
+
+.intro {
+    margin: 0;
+    line-height: 1.15;
+}
+
+h1 {
+    font-size: 1.2rem;
+}
+
+h2 {
+    font-size: 1rem;
+}
+
 .role-viewport {
     display: block;
     overflow: visible;
     max-width: 100%;
-    min-height: 2.8rem;
-
+    min-height: calc(2 * 1.15em);
+    margin-bottom: 0.625rem;
 }
 
 .role-text {
@@ -68,7 +84,7 @@ a {
 }
 
 .role-text.is-toggleable:hover {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23555555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 7a7 7 0 0 1 10 0'/%3E%3Cpath d='M17 4v3h-3'/%3E%3Cpath d='M17 17a7 7 0 0 1-10 0'/%3E%3Cpath d='M7 20v-3h3'/%3E%3C/g%3E%3C/svg%3E") 12 12, pointer;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 7a7 7 0 0 1 10 0'/%3E%3Cpath d='M17 4v3h-3'/%3E%3Cpath d='M17 17a7 7 0 0 1-10 0'/%3E%3Cpath d='M7 20v-3h3'/%3E%3C/g%3E%3C/svg%3E") 12 12, pointer;
 }
 
 @keyframes slide-out-right {
@@ -112,7 +128,7 @@ ul {
 @media (max-width: 768px) {
     body {
         min-height: auto;
-        padding: 2rem:
+        padding: 2rem;
     }
 
     .main-content {
@@ -123,8 +139,8 @@ ul {
         display: block;
         overflow: visible;
         max-width: 100%;
-        min-height: 2.8rem;
-        margin-bottom: 10px;
+        min-height: calc(2 * 1.15em);
+        margin-bottom: 0.625rem;
     }
 
     .role-text {
@@ -136,7 +152,7 @@ ul {
 
 @media (max-width: 480px) {
     body {
-        font-size: 1.1rem;
+        font-size: 0.8rem;
         padding: 2rem;
     }
 
@@ -160,16 +176,16 @@ ul {
 .progress-segment {
     width: 25%;
     height: 3px;
-    background-color: rgb(214, 209, 204);
+    background-color: rgb(221, 221, 221);
     border-radius: 3px;
     overflow: hidden;
     position: relative;
-    -webkit-tap-highlight-color: rgba(157, 157, 157, 0.35);
+    -webkit-tap-highlight-color: rgba(120, 120, 120, 0.25);
     user-select: none;
 }
 
 .progress-segment:active {
-    background-color: rgb(157, 157, 157);
+    background-color: rgb(132, 132, 132);
 }
 
 .progress-segment::after {
@@ -179,7 +195,7 @@ ul {
     left: 0;
     width: 0;
     height: 100%;
-    background-color: rgb(161, 161, 161);
+    background-color: rgb(126, 126, 126);
 }
 
 .progress-segment.done::after {
@@ -226,4 +242,12 @@ ul {
     to {
         opacity: 1;
     }
+}
+
+.content-section {
+    margin-top: 2.5rem;
+}
+
+.intro {
+    margin-top: 1rem;
 }
