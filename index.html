@@ -13,8 +13,7 @@
     <div class="main-content">
         Hi, my name is Jan Gorecki and I<br>
         <span class="role-viewport">
-            <span id="role-text" class="role-text">am frontend dev at <a href="https://www.lawlift.com/">Lawlift
-                    GmbH</a>.</span>
+            <span id="role-text" class="role-text">am ocassional long distance skater</span>
         </span>
         <div class="progress-bar">
             <div class="progress-segment" tabindex="0"></div>
@@ -60,6 +59,8 @@
 
         let currentIndex = 0;
         let isStopped = false;
+        let rotationTimeoutId = null;
+        let finalizeTimeoutId = null;
         const cycleMs = 3300;
         const animationMs = 450;
 
@@ -84,7 +85,14 @@
         const stopRotation = () => {
             if (isStopped) return;
             isStopped = true;
-            clearInterval(rotationId);
+            if (rotationTimeoutId) clearTimeout(rotationTimeoutId);
+            if (finalizeTimeoutId) clearTimeout(finalizeTimeoutId);
+        };
+
+        const scheduleNextRotation = () => {
+            if (isStopped) return;
+            if (currentIndex >= rotatingTexts.length - 1) return;
+            rotationTimeoutId = setTimeout(rotateRoles, cycleMs);
         };
 
         const jumpToRole = (index) => {
@@ -128,14 +136,18 @@
                 roleText.classList.add('is-in');
 
                 if (currentIndex >= rotatingTexts.length - 1) {
-                    // reached Lawlift — stop here
-                    stopRotation();
-                    progressSegments.forEach(seg => {
-                        seg.classList.remove('active');
-                        seg.classList.add('done');
-                    });
+                    // reached Lawlift — keep final segment filling at normal speed
+                    isStopped = true;
+                    updateProgressBar(cycleMs);
+                    finalizeTimeoutId = setTimeout(() => {
+                        progressSegments.forEach(seg => {
+                            seg.classList.remove('active');
+                            seg.classList.add('done');
+                        });
+                    }, cycleMs);
                 } else {
                     updateProgressBar(cycleMs - animationMs);
+                    scheduleNextRotation();
                 }
             }, animationMs);
         };
@@ -143,7 +155,7 @@
         // Initialize: show first text and start progress bar
         roleText.innerHTML = rotatingTexts[0];
         updateProgressBar(cycleMs);
-        const rotationId = setInterval(rotateRoles, cycleMs);
+        scheduleNextRotation();
 
         // Make each progress segment clickable
         progressSegments.forEach((seg, index) => {

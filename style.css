@@ -48,7 +48,7 @@ a {
 
 .role-text {
     display: inline-block;
-    white-space: nowrap;
+    white-space: break-spaces;
     will-change: transform, opacity;
 }
 
@@ -125,7 +125,7 @@ ul {
 
     .role-text {
         display: inline-block;
-        white-space: nowrap;
+        white-space: break-spaces;
     }
 }
 
@@ -149,13 +149,13 @@ ul {
     gap: 6px;
     margin-top: 10px;
     width: 100%;
-    opacity: 55%
+
 }
 
 .progress-segment {
     width: 25%;
-    height: 5px;
-    background-color: rgb(218, 214, 210);
+    height: 3px;
+    background-color: rgb(214, 209, 204);
     border-radius: 3px;
     overflow: hidden;
     position: relative;
@@ -174,7 +174,7 @@ ul {
     left: 0;
     width: 0;
     height: 100%;
-    background-color: rgb(157, 157, 157);
+    background-color: rgb(161, 161, 161);
 }
 
 .progress-segment.done::after {
