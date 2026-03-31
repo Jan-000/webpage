@@ -40,15 +40,18 @@ a {
 }
 
 .role-viewport {
-    display: inline-block;
-    overflow: hidden;
+    display: block;
+    overflow: visible;
     max-width: 100%;
-    vertical-align: bottom;
+    min-height: 2.8rem;
+
 }
 
 .role-text {
-    display: inline-block;
-    white-space: break-spaces;
+    display: block;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    max-width: 100%;
     will-change: transform, opacity;
 }
 
@@ -103,7 +106,7 @@ ul ul li {
 
 ul {
     line-height: 1.4;
-    padding-left: 1.2em;
+    padding-left: 1.2rem;
 }
 
 @media (max-width: 768px) {
@@ -117,15 +120,17 @@ ul {
     }
 
     .role-viewport {
-        display: inline-block;
-        overflow: hidden;
+        display: block;
+        overflow: visible;
         max-width: 100%;
-        vertical-align: bottom;
+        min-height: 2.8rem;
+        margin-bottom: 10px;
     }
 
     .role-text {
-        display: inline-block;
-        white-space: break-spaces;
+        display: block;
+        white-space: normal;
+        overflow-wrap: anywhere;
     }
 }
 
@@ -136,7 +141,7 @@ ul {
     }
 
     ul {
-        padding-left: 1em;
+        padding-left: 1rem;
     }
 }
 
@@ -147,7 +152,7 @@ ul {
 .progress-bar {
     display: flex;
     gap: 6px;
-    margin-top: 10px;
+    margin-top: 0;
     width: 100%;
 
 }
