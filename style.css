@@ -175,7 +175,7 @@ ul {
 
 .progress-segment {
     width: 25%;
-    height: 3px;
+    height: 2px;
     background-color: rgb(221, 221, 221);
     border-radius: 3px;
     overflow: hidden;
