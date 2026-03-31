@@ -17,10 +17,10 @@
                     GmbH</a>.</span>
         </span>
         <div class="progress-bar">
-            <div class="progress-segment"></div>
-            <div class="progress-segment"></div>
-            <div class="progress-segment"></div>
-            <div class="progress-segment"></div>
+            <div class="progress-segment" tabindex="0"></div>
+            <div class="progress-segment" tabindex="0"></div>
+            <div class="progress-segment" tabindex="0"></div>
+            <div class="progress-segment" tabindex="0"></div>
         </div>
 
         <br><br>Samples of my work:
@@ -102,7 +102,12 @@
                 roleText.classList.remove('is-fade-out');
                 roleText.classList.add('is-fade-in');
             }, fadeMs);
-            // keep all segments visually the same (all done = all dark grey)
+
+            // clicked segment stays dark grey (done), all others revert to light grey
+            progressSegments.forEach((s, i) => {
+                s.classList.remove('active', 'done');
+                if (i === index) s.classList.add('done');
+            });
         };
 
         const rotateRoles = () => {
@@ -143,7 +148,10 @@
         // Make each progress segment clickable
         progressSegments.forEach((seg, index) => {
             seg.style.cursor = 'pointer';
-            seg.addEventListener('click', () => jumpToRole(index));
+            seg.addEventListener('click', () => {
+                jumpToRole(index);
+                seg.blur();
+            });
         });
     </script>
 </body>
