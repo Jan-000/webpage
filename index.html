@@ -86,6 +86,13 @@
             startSegmentFill(currentIndex, duration);
         };
 
+        const resetProgressToFirst = () => {
+            progressSegments.forEach((seg, i) => {
+                seg.classList.remove('active', 'done');
+                if (i === 0) seg.classList.add('done');
+            });
+        };
+
         const stopRotation = () => {
             if (isStopped) return;
             isStopped = true;
@@ -140,14 +147,21 @@
                 roleText.classList.add('is-in');
 
                 if (currentIndex >= rotatingTexts.length - 1) {
-                    // reached the last role — keep final segment filling at normal speed
+                    // Reached the last role. After its segment fills, slide back to the first role
+                    // and reset indicators to invite manual exploration.
                     isStopped = true;
                     updateProgressBar(cycleMs);
                     finalizeTimeoutId = setTimeout(() => {
-                        progressSegments.forEach(seg => {
-                            seg.classList.remove('active');
-                            seg.classList.add('done');
-                        });
+                        roleText.classList.remove('is-in');
+                        roleText.classList.add('is-out');
+
+                        setTimeout(() => {
+                            roleText.innerHTML = rotatingTexts[0];
+                            roleText.classList.remove('is-out');
+                            roleText.classList.add('is-in');
+                            currentIndex = 0;
+                            resetProgressToFirst();
+                        }, animationMs);
                     }, cycleMs);
                 } else {
                     updateProgressBar(cycleMs - animationMs);
