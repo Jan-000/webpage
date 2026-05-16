@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Automation App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main-content project-page">
+        <header class="sticky-header">
+            <p class="project-label">Document automation app</p>
+            <h1 id="story-title" class="story-title is-in">Intake flow</h1>
+        </header>
+
+        <main class="story-list">
+            <div class="story-slot">
+                <div class="story-media-placeholder">Video slot 1</div>
+            </div>
+
+            <h2 class="story-trigger" data-title="Template editing">Template editing</h2>
+
+            <div class="story-slot">
+                <div class="story-media-placeholder">Video slot 2</div>
+            </div>
+
+            <h2 class="story-trigger" data-title="Review and export">Review and export</h2>
+
+            <div class="story-slot">
+                <div class="story-media-placeholder">Video slot 3</div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const storyTitle = document.getElementById('story-title');
+        const stickyHeader = document.querySelector('.sticky-header');
+        const triggers = Array.from(document.querySelectorAll('.story-trigger'));
+        const firstTitle = 'Intake flow';
+        let swapTimerId = null;
+        let rafId = null;
+
+        const swapTitle = (newText) => {
+            if (storyTitle.textContent === newText) return;
+
+            storyTitle.classList.remove('is-in');
+            storyTitle.classList.add('is-out');
+
+            clearTimeout(swapTimerId);
+            swapTimerId = setTimeout(() => {
+                storyTitle.textContent = newText;
+                storyTitle.classList.remove('is-out');
+                storyTitle.classList.add('is-in');
+            }, 140);
+        };
+
+        const sync = () => {
+            rafId = null;
+            const headerBottom = stickyHeader.getBoundingClientRect().bottom;
+            let active = firstTitle;
+
+            triggers.forEach((trigger) => {
+                if (trigger.getBoundingClientRect().top <= headerBottom) {
+                    active = trigger.dataset.title;
+                }
+            });
+
+            swapTitle(active);
+        };
+
+        const scheduleSync = () => {
+            if (rafId !== null) return;
+            rafId = requestAnimationFrame(sync);
+        };
+
+        window.addEventListener('scroll', scheduleSync, { passive: true });
+        window.addEventListener('resize', scheduleSync);
+    </script>
+</body>
+
+</html>
