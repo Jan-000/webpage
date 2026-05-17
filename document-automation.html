@@ -18,8 +18,14 @@
         <main class="story-list">
             <section class="story-section">
                 <h2 class="story-title">Intake flow</h2>
+                <p class="section-copy">Here are </p>
                 <div class="story-slot">
-                    <div class="story-media-placeholder">Video slot 1</div>
+                    <div class="story-video-frame" data-video-frame>
+                        <video class="story-video" controls autoplay muted playsinline width="100%">
+                            <source src="converted outputs/changes_indicator_output.mp4" type="video/mp4">
+                        </video>
+                        <button class="video-backdrop" type="button" aria-label="Toggle play or pause"></button>
+                    </div>
                 </div>
             </section>
 
@@ -38,6 +44,81 @@
             </section>
         </main>
     </div>
+    <script>
+        (function () {
+            const CONTROL_STRIP_HEIGHT = 50;
+
+            function setupVideoFrame(frame) {
+                const video = frame.querySelector('video');
+                const backdrop = frame.querySelector('.video-backdrop');
+                if (!video || !backdrop) {
+                    return;
+                }
+
+                const state = { hovering: false };
+
+                function syncUI() {
+                    const paused = video.paused;
+                    frame.classList.toggle('is-video-paused', paused);
+                    frame.classList.toggle('is-backdrop-visible', paused && state.hovering);
+                    backdrop.setAttribute('aria-label', paused ? 'Play video' : 'Pause video');
+                }
+
+                async function togglePlayback() {
+                    if (video.paused) {
+                        try {
+                            await video.play();
+                        } catch (error) {
+                            // If autoplay/play is blocked, keep paused styling in sync.
+                            syncUI();
+                            return;
+                        }
+                    } else {
+                        video.pause();
+                    }
+                    syncUI();
+                }
+
+                function clickIsInControlsStrip(event) {
+                    const rect = video.getBoundingClientRect();
+                    return event.clientY - rect.top > rect.height - CONTROL_STRIP_HEIGHT;
+                }
+
+                video.addEventListener('click', function (event) {
+                    if (clickIsInControlsStrip(event)) {
+                        return;
+                    }
+                    event.preventDefault();
+                    togglePlayback();
+                });
+
+                frame.addEventListener('mouseenter', function () {
+                    state.hovering = true;
+                    syncUI();
+                });
+
+                frame.addEventListener('mouseleave', function () {
+                    state.hovering = false;
+                    syncUI();
+                });
+
+                backdrop.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    togglePlayback();
+                });
+
+                video.addEventListener('pause', syncUI);
+                video.addEventListener('play', syncUI);
+                video.addEventListener('loadeddata', function () {
+                    video.play().catch(syncUI);
+                });
+
+                syncUI();
+            }
+
+            document.querySelectorAll('[data-video-frame]').forEach(setupVideoFrame);
+        })();
+    </script>
 </body>
 
 </html>
