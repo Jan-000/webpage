@@ -354,18 +354,21 @@ ul {
 
 .story-video-frame {
     position: relative;
+    width: 60%;
+    max-width: 100%;
+    min-width: 18rem;
+    min-height: 0;
+    resize: horizontal;
     border-radius: 4px;
     overflow: hidden;
     border: 1px solid rgb(221, 221, 221);
-    background: rgb(16, 16, 16);
+    background: transparent;
 }
 
 .story-video {
     display: block;
     width: 100%;
     height: auto;
-    min-height: min(68vh, 42rem);
-    object-fit: cover;
 }
 
 .video-backdrop {
@@ -441,6 +444,12 @@ ul {
     .story-media-placeholder {
         min-height: 24rem;
     }
+
+    .story-video-frame {
+        width: 100%;
+        min-width: 0;
+        resize: horizontal;
+    }
 }
 
 @media (max-width: 480px) {
@@ -454,7 +463,7 @@ ul {
     }
 
     .story-video {
-        min-height: 20rem;
+        min-height: 0;
     }
 }
 
