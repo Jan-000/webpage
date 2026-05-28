@@ -471,6 +471,11 @@ ul {
         justify-content: flex-start;
         overflow: hidden;
         scroll-margin-top: 0;
+        padding-top: 1rem;
+    }
+
+    .story-section + .story-section {
+        padding-top: 2rem;
     }
 
     .story-title {
